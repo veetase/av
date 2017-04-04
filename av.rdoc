@@ -1,0 +1,5 @@
+= av
+
+Generate this with
+    av rdoc
+After you have described your command line interface
