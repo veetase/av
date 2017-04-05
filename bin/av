@@ -11,7 +11,7 @@ end
 
 include GLI::App
 
-program_desc 'Describe your application here'
+program_desc 'an easy-use tool for automatically backup datebase to cloud.'
 
 version Av::VERSION
 
@@ -36,22 +36,27 @@ command :backup do |c|
   c.default_value 'default'
   c.flag :f
   c.action do |global_options,options,args|
-
-    # Your command logic here
-     
-    # If you have any errors, just raise them
-    # raise "that command made no sense"
+    now = Time.now.to_s
+    filename = "bcareserver_prod_#{now}.sql.gz"
+    backup_command = "pg_dump bcareserver_prod | gzip > #{filename}"
+    # backup_command = "ls"
+    output = system(backup_command)
+    if output
+      upload("#{Dir.pwd}/#{filename}", filename)
+    else
+      puts "备份失败，备份命令为#{backup_command}"
+    end
 
     puts "backup command ran"
   end
 end
 
+def upload(path, filename)
+  upload_cmd = "qshell_linux_amd64 rput database-backup #{filename} #{path}"
+  system(backup_command)
+end
+
 pre do |global,command,options,args|
-  # Pre logic here
-  # Return true to proceed; false to abort and not call the
-  # chosen command
-  # Use skips_pre before a command to skip this block
-  # on that command only
   true
 end
 

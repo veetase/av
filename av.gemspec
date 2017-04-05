@@ -1,13 +1,13 @@
 # Ensure we require the local version and not one we might have installed already
 require File.join([File.dirname(__FILE__),'lib','av','version.rb'])
-spec = Gem::Specification.new do |s| 
+spec = Gem::Specification.new do |s|
   s.name = 'av'
   s.version = Av::VERSION
-  s.author = 'Your Name Here'
-  s.email = 'your@email.address.com'
-  s.homepage = 'http://your.website.com'
+  s.author = 'Stephen Wong'
+  s.email = 'veetase@gmail.com'
+  s.homepage = 'http://veetase.cf'
   s.platform = Gem::Platform::RUBY
-  s.summary = 'A description of your project'
+  s.summary = 'an easy-use tool for automatically backup datebase to cloud.'
   s.files = `git ls-files`.split("
 ")
   s.require_paths << 'lib'
