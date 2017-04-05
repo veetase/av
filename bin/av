@@ -40,7 +40,7 @@ command :backup do |c|
     filename = "bcareserver_prod_#{now}.sql.gz"
     backup_command = "pg_dump bcareserver_prod | gzip > #{filename}"
     # backup_command = "ls"
-    output = system(backup_command)
+    output = system("#{backup_command}")
     if output
       upload("#{Dir.pwd}/#{filename}", filename)
     else
@@ -52,6 +52,7 @@ command :backup do |c|
 end
 
 def upload(path, filename)
+  puts "开始上传..."
   upload_cmd = "qshell_linux_amd64 rput database-backup #{filename} #{path}"
   system(backup_command)
 end
