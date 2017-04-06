@@ -54,7 +54,7 @@ end
 def upload(path, filename)
   puts "开始上传..."
   upload_cmd = "qshell_linux_amd64 rput database-backup #{filename} #{path}"
-  system(backup_command)
+  system("#{upload_cmd}")
 end
 
 pre do |global,command,options,args|
