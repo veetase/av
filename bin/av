@@ -43,11 +43,14 @@ command :backup do |c|
     output = system("#{backup_command}")
     if output
       upload("#{Dir.pwd}/#{filename}", filename)
+      puts "删除临时文件..."
+      system("rm bcareserver_prod_*")
+      puts "删除完毕"
     else
       puts "备份失败，备份命令为#{backup_command}"
     end
 
-    puts "backup command ran"
+    puts "上传完毕"
   end
 end
 
